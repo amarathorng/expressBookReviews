@@ -39,7 +39,7 @@ public_users.get('/isbn/:isbn', async function(req, res) {
   const isbn = req.params.isbn;
 
   try{
-    const response = await axios.get(`http://localhost:5000/title/${encodeURIComponent(isbn)}`);
+    const response = await axios.get(`http://localhost:5000/title/:isbn}`);
     res.status(200).json(response.data);
   } catch (error){
     res.status(404).json({message: "Book not found", error: error.message});
@@ -51,7 +51,7 @@ public_users.get('/isbn/:isbn', async function(req, res) {
 public_users.get('/author/:author', async (req, res) => {
     try {
         const author = req.params.author;
-        const response = await axios.get(`http://localhost:5000/title/${encodeURIComponent(author)}`)
+        const response = await axios.get(`http://localhost:5000/author/:author)}`)
         res.status(200).json(response.data);
 
         res.status(200).json(authorBooks);
@@ -64,7 +64,7 @@ public_users.get('/author/:author', async (req, res) => {
 public_users.get('/title/:title', async (req, res) => {
     try {
         const title = req.params.title;
-        const response = await axios.get(`http://localhost:5000/title/${encodeURIComponent(title)}`)
+        const response = await axios.get(`http://localhost:5000/title/:title}`)
         res.status(200).json(response.data);
     } catch (error) {
         res.status(404).json({ message: error });
