@@ -8,9 +8,6 @@ const public_users = express.Router();
 
 public_users.use(express.json());
 
-
-
-
 public_users.post("/register", (req,res) => {
   //Write your code here
   let username = req.body.username;
@@ -30,17 +27,6 @@ public_users.post("/register", (req,res) => {
 
 
 });
-//task 1 
-// Get the book list available in the shop
-// public_users.get('/', async function (req, res) {
-
-//   if (books) {
-//     return res.status(200).send(JSON.stringify(books, null, 4));
-//   } else {
-//     return res.status(404).json({ message: "No books found" });
-//   }
-// });
-
 
 public_users.get('/', async function (req, res) {
   //Write your code here
@@ -57,19 +43,6 @@ public_users.get('/', async function (req, res) {
 
 
 // Get book details based on ISBN
-
-//task 2
-// public_users.get('/isbn/:isbn',function (req, res) {
-//   //Write your code here
-//   let isbn = req.params.isbn;
-//   if(books[isbn]){
-//     return res.status(200).send(JSON.stringify(books[isbn],null,4));
-//   }
-//   else{
-//     return res.status(404).send("No book found with ISBN "+isbn);
-//   }
-
-//  });
   
  // task 11
 public_users.get('/isbn/:isbn', async function (req, res) {
@@ -90,32 +63,6 @@ public_users.get('/isbn/:isbn', async function (req, res) {
     return res.status(500).send("Internal Server Error");
   }
 });
-
-
-
-
-
-
-
-
-// Get book details based on author 
-//task 3
-// public_users.get('/author/:author',function (req, res) {
-//   //Write your code here
-//   let author = req.params.author;
-//   let booksByAuthor = [];
-//   for(let isbn in books){
-//     if(books[isbn].author == author){
-//       booksByAuthor.push(books[isbn]);
-//     }
-//   }
-//   if(booksByAuthor.length>0){
-//     return res.status(200).send(JSON.stringify(booksByAuthor,null,4));
-//   }
-//   else{
-//     return res.status(404).send("No book found with author "+author);
-//   }
-// });
 
 //task 12
 public_users.get('/author/:author', async function (req, res) {
@@ -145,37 +92,6 @@ public_users.get('/author/:author', async function (req, res) {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-// Get all books based on title
-//task 4
-// public_users.get('/title/:title',function (req, res) {
-//   //Write your code here
-//   let title = req.params.title;
-//   let booksByTitle = [];
-//   for(let isbn in books){
-//     if(books[isbn].title == title){
-//       booksByTitle.push(books[isbn]);
-//     }
-//   }
-//   if(booksByTitle.length>0){
-//     return res.status(200).send(JSON.stringify(booksByTitle,null,4));
-//   }
-//   else{
-//     return res.status(404).send("No book found with title "+title);
-//   }
-
-// });
-
 //task 13
 
 public_users.get('/title/:title', async function (req, res) {
@@ -204,22 +120,6 @@ public_users.get('/title/:title', async function (req, res) {
     return res.status(500).send("Internal Server Error");
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
