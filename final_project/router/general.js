@@ -23,34 +23,42 @@ public_users.post("/register", (req, res) => {
     return res.status(200).json({ message: "User registered successfully" });
 });
 
-// Task 10: Get all books (simulate Axios async)
+// Task 10: Get all books using async callback
 public_users.get('/', async (req, res) => {
     try {
-        const allBooks = await new Promise((resolve, reject) => {
-            if (books) resolve(books);
-            else reject("No books available");
-        });
+        const getBooks = async () => {
+            return books;
+        };
+
+        const allBooks = await getBooks();
         res.status(200).json(allBooks);
     } catch (error) {
-        res.status(500).json({ message: error });
+        res.status(500).json({ message: "Error fetching books" });
     }
 });
 
-// Task 11: Get book by ISBN
-public_users.get('/isbn/:isbn', async (req, res) => {
-    try {
-        const isbn = req.params.isbn;
 
-        const book = await new Promise((resolve, reject) => {
-            if (books[isbn]) resolve(books[isbn]);
-            else reject("Book not found");
+// Task 11: Get book by ISBN using Promises
+public_users.get('/isbn/:isbn', (req, res) => {
+    const isbn = req.params.isbn;
+
+    const getBookByISBN = new Promise((resolve, reject) => {
+        if (books[isbn]) {
+            resolve(books[isbn]);
+        } else {
+            reject("Book not found");
+        }
+    });
+
+    getBookByISBN
+        .then((book) => {
+            res.status(200).json(book);
+        })
+        .catch((error) => {
+            res.status(404).json({ message: error });
         });
-
-        res.status(200).json(book);
-    } catch (error) {
-        res.status(404).json({ message: error });
-    }
 });
+
 
 // Task 12: Get books by author
 public_users.get('/author/:author', async (req, res) => {
